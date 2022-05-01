@@ -1,0 +1,13 @@
+data_falcon9 = df.loc[df['BoosterVersion']!="Falcon 1"]
+
+data_falcon9.loc[:,'FlightNumber'] = list(range(1, data_falcon9.shape[0]+1))
+
+data_falcon9.isnull().sum()
+
+# Calculate the mean value of PayloadMass column
+mean = data_falcon9['PayloadMass'].mean()
+# Replace the np.nan values with its mean value
+data_falcon9['PayloadMass'] = data_falcon9['PayloadMass'].fillna(mean)
+
+data_falcon9.isnull().sum()
+data_falcon9.to_csv('dataset_part_1.csv', index=False)
